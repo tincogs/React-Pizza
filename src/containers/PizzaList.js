@@ -10,7 +10,8 @@ class PizzaList extends Component {
     this.props.pizzas.map(pizza => {
       return(<Pizza
       key={pizza.id}
-      pizza={pizza}
+      details={pizza}
+      onEdit={this.props.onEdit}
       />)
     })
     )

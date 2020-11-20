@@ -4,12 +4,24 @@ import Header from './components/Header'
 // import PizzaForm from './components/PizzaForm'
 import PizzaList from './containers/PizzaList'
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
-      currentPizzas: []
+      currentPizzas: [],
+      newEditPizza: []
     }
+  }
+
+  onEdit = (pizzaId) => {
+    // console.log(pizzaId,"im the edit")
+    
+  let editPizza = this.state.currentPizzas.filter(obj =>{
+     return obj.id === pizzaId
+    })
+    this.setState({ 
+      newEditPizza: editPizza  });
+    console.log(this.state.newEditPizza)
   }
 
   componentDidMount(){
@@ -18,16 +30,17 @@ class App extends Component {
     .then(pizzas => this.setState({currentPizzas: pizzas}))
   }
 
-  componentWillUnmount() {
+  componentWillMount() {
     this.state.currentPizzas
   }
   
   render() {
+    
     return (
       <Fragment>
         <Header/>
         {/* <PizzaForm/> */}
-        <PizzaList pizzas={this.state.currentPizzas}/>
+        <PizzaList pizzas={this.state.currentPizzas} onEdit={this.onEdit}/>
       </Fragment>
     );
   }
