@@ -15,13 +15,16 @@ class App extends Component {
 
   onEdit = (pizzaId) => {
     // console.log(pizzaId,"im the edit")
-    
-  let editPizza = this.state.currentPizzas.filter(obj =>{
-     return obj.id === pizzaId
-    })
-    this.setState({ 
-      newEditPizza: editPizza  });
-    console.log(this.state.newEditPizza)
+  // let editPizza = this.state.currentPizzas.filter(obj =>{
+  //    return obj.id === pizzaId
+  //   })
+    this.setState(previousState => {
+      return {
+      newEditPizza: previousState.currentPizzas.filter(obj =>{
+        return obj.id === pizzaId
+        })
+      }
+    }, () => console.log(this.state.newEditPizza));
   }
 
   componentDidMount(){
@@ -33,9 +36,9 @@ class App extends Component {
   componentWillMount() {
     this.state.currentPizzas
   }
-  
+
   render() {
-    
+
     return (
       <Fragment>
         <Header/>
